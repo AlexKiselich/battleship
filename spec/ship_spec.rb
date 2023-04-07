@@ -11,4 +11,16 @@ RSpec.describe Ship do
     end
   end
 
+  describe '#name' do
+    it 'has a name' do
+      expect(@cruiser.name).to eq('Cruiser')
+    end
+  end
+
+  describe '#length' do
+    it 'has a length' do
+      expect(@cruiser.length).to eq(3)
+    end
+  end
+
 end
