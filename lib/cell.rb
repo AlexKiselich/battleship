@@ -15,6 +15,5 @@ class Cell
   end
 
 
-
   
 end
