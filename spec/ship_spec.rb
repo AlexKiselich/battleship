@@ -23,4 +23,10 @@ RSpec.describe Ship do
     end
   end
 
+  describe '#health' do
+    it 'has health points' do
+      expect(@cruiser.health).to eq(3)
+    end
+  end
+
 end
