@@ -33,7 +33,7 @@ RSpec.describe Cell do
   describe '#place_ship' do
     it 'places a ship' do    
       @cell.place_ship(@cruiser)
-      
+
       expect(@cell.ship).to eq(@cruiser)
       expect(@cell.empty?).to be(false) 
     end
