@@ -16,4 +16,12 @@ RSpec.describe Cell do
       expect(@cell.coordinate).to eq("B4")
     end
   end
+
+  describe '#ship' do
+    it 'checks for a ship' do
+      expect(@cell.ship).to eq(nil)
+    end
+  end
+
+  
 end
