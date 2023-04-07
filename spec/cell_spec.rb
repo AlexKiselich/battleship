@@ -23,5 +23,19 @@ RSpec.describe Cell do
     end
   end
 
-  
+  describe '#empty?' do
+    it 'checks if cell is empty' do
+      expect(@cell.empty?).to be(true)
+    end
+  end
+
+  describe '#place_ship' do
+    it 'places a ship' do 
+      @cruiser = Ship.new("Cruiser", 3)
+      @cell.place_ship(@cruiser)
+
+      expect(@cell.ship).to be_a(Ship)
+      expect(@cell.empty?).to be(false) 
+    end
+  end
 end
