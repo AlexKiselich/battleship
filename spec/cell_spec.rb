@@ -12,6 +12,8 @@ RSpec.describe Cell do
   end
 
   describe '#coordinate' do
-    it 'can coordinate' do
-      expect(@cell).to eq("B4")
+    it 'can have coordinates' do
+      expect(@cell.coordinate).to eq("B4")
+    end
+  end
 end
