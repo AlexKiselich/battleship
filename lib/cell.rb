@@ -3,10 +3,12 @@ class Cell
   
   def initialize(coordinate)
     @coordinate = coordinate
-    @ship = nil
+    @ship = ship
   end
 
-  
+  def empty?
+    @ship.nil? 
+  end
 
   
 end
