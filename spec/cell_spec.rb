@@ -33,8 +33,8 @@ RSpec.describe Cell do
     it 'places a ship' do 
       @cruiser = Ship.new("Cruiser", 3)
       @cell.place_ship(@cruiser)
-
-      expect(@cell.ship).to be_a(Ship)
+      
+      expect(@cell.ship).to eq(@cruiser)
       expect(@cell.empty?).to be(false) 
     end
   end
