@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe Cell do
   before(:each) do
     @cell = Cell.new("B4")
+    @cruiser = Ship.new("Cruiser", 3)
   end
 
   describe '#initialize' do
@@ -30,12 +31,22 @@ RSpec.describe Cell do
   end
 
   describe '#place_ship' do
-    it 'places a ship' do 
-      @cruiser = Ship.new("Cruiser", 3)
+    it 'places a ship' do    
       @cell.place_ship(@cruiser)
       
       expect(@cell.ship).to eq(@cruiser)
       expect(@cell.empty?).to be(false) 
+    end
+  end
+      
+  describe '#fired_upon?' do
+    it 'can get fired upon' do 
+      @cell.place_ship(@cruiser)
+      expect(@cell.fired_upon?).to be(false)
+
+      @cell.fire_upon
+      expect(@cell.ship.health).to eq(2)
+      expect(@cell.fired_upon?).to be(true)
     end
   end
 end
