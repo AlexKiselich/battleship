@@ -10,7 +10,7 @@ class Cell
   end
 
   def empty?
-    @ship.nil? 
+     @ship.nil?
   end
 
   def place_ship(ship)
@@ -22,8 +22,21 @@ class Cell
   end
 
   def fire_upon
-    @fired_upon = true
-    @ship.hit
+    # require 'pry'; binding.pry
+    if empty?
+    @fired_upon
+    else
+      @fired_upon = true
+      @ship.hit
+    end
+  end
+
+  def render
+    if empty?
+      "M"
+    else
+      
+
   end
 
 end
