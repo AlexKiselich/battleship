@@ -27,7 +27,7 @@ attr_reader :cells
   end
 
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.length && consecutive?(coordinates) && !overlapping?(coordinates)
+    ship.length == coordinates.length && consecutive?(coordinates) && overlapping?(coordinates)
   end
   
   def place(ship, coordinates)
@@ -76,14 +76,11 @@ attr_reader :cells
   end
 
   def overlapping?(coordinates)
-    require 'pry'; binding.pry
+    coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
+    end
     
-    # emp_spc = coordinates.each do |coordinate|
-    #   @cells[coordinate.empty?]
-    #     false
-    
-    # end
-    # emp_spc.empty?
   end
+  # require 'pry'; binding.pry
 
 end
