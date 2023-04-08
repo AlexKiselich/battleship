@@ -76,14 +76,26 @@ attr_reader :cells
   end
 
   def overlapping?(coordinates)
-    require 'pry'; binding.pry
-    
-    # emp_spc = coordinates.each do |coordinate|
-    #   @cells[coordinate.empty?]
-    #     false
-    
-    # end
-    # emp_spc.empty?
+    # require 'pry'; binding.pry
+
+    overlap = false
+    coordinates.each do |coordinate|
+      if !@cells[coordinate].empty?
+        overlap = true
+      end
+    end
+    overlap
+
+    ###
+
+    # coordinates.any? { |coordinate| !@cells[coordinate].empty? }
+
+  #   coordinates.each do |coordinate|
+  #     if !(@cells[coordinate].empty?)
+  #       return true
+  #     end
+  #   end
+  #   false
   end
 
 end

@@ -33,7 +33,7 @@ RSpec.describe Board do
   end
 
   describe '#valid_placement?' do
-    xit 'validates placement of a ship' do
+    it 'validates placement of a ship' do
       expect(@board.valid_placement?(@cruiser, ['A1', 'A2'])).to eq(false)
       expect(@board.valid_placement?(@submarine, ["A2", "A3", "A4"])).to eq(false)
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq(false)
@@ -46,7 +46,7 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to eq(true)
     end
 
-    xit 'Places ships' do
+    it 'Places ships' do
     
       @board.place(@cruiser, ["A1", "A2", "A3"])
       cell_1 = @board.cells["A1"]
