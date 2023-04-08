@@ -30,6 +30,15 @@ attr_reader :cells
     ship.length == coordinates.length && consecutive?(coordinates)
   end
 
+  def place(ship, coordinates)
+    ship_placement = coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
+    end
+    ship_placement
+  end
+
+  #........Helper Methods Below......
+
   def consecutive?(coordinates)
     (same_letter?(coordinates) && horizontal?(coordinates)) || (same_number?(coordinates) && vertical?(coordinates))
   end
@@ -48,11 +57,6 @@ attr_reader :cells
     numbers.uniq.count == 1
   end
 
-  def ranges
-    { range_number: '1'..'4',
-      range_letter: 'A'..'D'
-    }
-  end
 
   def vertical?(coordinates)
     coord_ltrs = coordinates.map do |coordinate|
@@ -70,44 +74,6 @@ attr_reader :cells
       coord_nums == range.to_a
   end
 
-  # def ranges
-  #   { range_A: 'A1'..'A4',
-  #     range_B: 'B1'..'B4',
-  #     range_C: 'C1'..'C4',
-  #     range_D: 'D1'..'D4',
-  #     range_1: 'A1'..'D1',
-  #     range_2: 'A2'..'D2',
-  #     range_3: 'A3'..'D3',
-  #     range_4: 'A4'..'D4'
-  #   }
-  # end
+
+
 end
-
-# same_letter?(coordinates) or same_number?(coordinates), iterate through, letters can be called by first index, numbers can be called by last index (-1).
-# first check all letters, then check to see if letters are in a range. If true, true. Letters need to match the range.
-# do same thing for numbers.
-# 
-
-# check if the coordinates exist in the range
-# need to establish the range
-# we need to know our ranges
-# test that we did checked to include our array and not the elements inside the array
-
-# coordinates need to be consecutive
-# I want 1-4 to be true, needs to be consecutive.
-# 1,2,4 would return false
-# 
-# ranges = [range_A = 'A1'..'A4',
-#           range_B = 'B1'..'B4',
-#           range_C = 'C1'..'C4',
-#           range_D = 'D1'..'D4',
-#           range_1 = 'A1'..'D1',
-#           range_2 = 'A2'..'D2',
-#           range_3 = 'A3'..'D3',
-#           range_4 = 'A4'..'D4'
-#         ]
-# if coordinates == ranges
-#   true
-# else
-#   false
-# end
