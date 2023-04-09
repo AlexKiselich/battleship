@@ -29,7 +29,7 @@ class Cell
   end
   
   def render(default = false)
-    require 'pry'; binding.pry
+    # require 'pry'; binding.pry
     if @fired_upon == false && empty? == false && default == true
       "S"
     elsif @fired_upon == true && empty? == true

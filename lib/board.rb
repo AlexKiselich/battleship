@@ -27,7 +27,7 @@ attr_reader :cells
   end
 
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.length && consecutive?(coordinates) && !overlapping?(coordinates)
+    ship.length == coordinates.length && consecutive?(coordinates) && overlapping?(coordinates)
   end
   
   def place(ship, coordinates)
@@ -76,26 +76,22 @@ attr_reader :cells
   end
 
   def overlapping?(coordinates)
-    # require 'pry'; binding.pry
-
-    overlap = false
-    coordinates.each do |coordinate|
-      if !@cells[coordinate].empty?
-        overlap = true
-      end
+    coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
     end
-    overlap
-
-    ###
-
-    # coordinates.any? { |coordinate| !@cells[coordinate].empty? }
-
-  #   coordinates.each do |coordinate|
-  #     if !(@cells[coordinate].empty?)
-  #       return true
-  #     end
-  #   end
-  #   false
+    
   end
+
+  def render(default = false)
+    # require 'pry'; binding.pry
+    "  1 2 3 4 \n" +
+    "A" "#{@cells["A1"].render}" + "#{@cells["A2"].render}" + "#{@cells["A3"].render}" + "#{@cells["A4"].render} \n" +
+    "B" "#{@cells["B1"].render}" + "#{@cells["B2"].render}" + "#{@cells["B3"].render}" + "#{@cells["B4"].render} \n" +
+    "C" "#{@cells["C1"].render}" + "#{@cells["C2"].render}" + "#{@cells["C3"].render}" + "#{@cells["C4"].render} \n" +
+    "D" "#{@cells["D1"].render}" + "#{@cells["D2"].render}" + "#{@cells["D3"].render}" + "#{@cells["D4"].render} \n" 
+
+  end
+
+  
 
 end
