@@ -46,16 +46,13 @@ RSpec.describe Board do
     end
 
     it 'Places ships' do
-    
       @board.place(@cruiser, ["A1", "A2", "A3"])
       cell_1 = @board.cells["A1"]
       cell_2 = @board.cells["A2"]
       cell_3 = @board.cells["A3"]
-
       expect(cell_1.ship).to eq(@cruiser)
       expect(cell_2.ship).to eq(@cruiser)
       expect(cell_3.ship).to eq(@cruiser)
-
       expect(cell_3.ship == cell_2.ship).to eq(true)
     end
 
@@ -67,8 +64,8 @@ RSpec.describe Board do
 
   describe "#render" do 
     it 'can render' do
-      @board.place(@cruiser, ["A1", "A2", "A4"])
-      expect(@board.render).to eq("  1 2 3 4 \nA.... \nB.... \nC.... \nD.... \n")
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
       expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end
@@ -112,9 +109,7 @@ RSpec.describe Board do
 
   describe '#overlapping?' do
     it 'can check to see if coordinates are overlapping' do
-      
       expect(@board.overlapping?(["A1", "A2"])).to eq(true)
-      
     end
   end
 
