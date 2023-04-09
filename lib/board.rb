@@ -88,7 +88,7 @@ attr_reader :cells
       "C " "#{@cells["C1"].render(true)} " + "#{@cells["C2"].render(true)} " + "#{@cells["C3"].render(true)} " + "#{@cells["C4"].render(true)} \n" +
       "D " "#{@cells["D1"].render(true)} " + "#{@cells["D2"].render(true)} " + "#{@cells["D3"].render(true)} " + "#{@cells["D4"].render(true)} \n" 
     else
-    # require 'pry'; binding.pry
+    require 'pry'; binding.pry
     "  1 2 3 4 \n" +
     "A " "#{@cells["A1"].render} " + "#{@cells["A2"].render} " + "#{@cells["A3"].render} " + "#{@cells["A4"].render} \n" +
     "B " "#{@cells["B1"].render} " + "#{@cells["B2"].render} " + "#{@cells["B3"].render} " + "#{@cells["B4"].render} \n" +
