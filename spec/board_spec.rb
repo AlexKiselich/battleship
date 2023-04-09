@@ -45,7 +45,8 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to eq(true)
     end
 
-    it '#place' do
+    it 'Places ships' do
+    
       @board.place(@cruiser, ["A1", "A2", "A3"])
       cell_1 = @board.cells["A1"]
       cell_2 = @board.cells["A2"]
