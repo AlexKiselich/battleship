@@ -8,7 +8,7 @@ RSpec.describe Cell do
 
   describe '#initialize' do
     it 'can initialize' do
-     expect(@cell_1).to be_a(Cell)
+      expect(@cell_1).to be_a(Cell)
     end
   end
 
@@ -33,7 +33,6 @@ RSpec.describe Cell do
   describe '#place_ship' do
     it 'places a ship' do    
       @cell_1.place_ship(@cruiser)
-
       expect(@cell_1.ship).to eq(@cruiser)
       expect(@cell_1.empty?).to be(false) 
     end
@@ -43,7 +42,6 @@ RSpec.describe Cell do
     it 'can get fired upon' do 
       @cell_1.place_ship(@cruiser)
       expect(@cell_1.fired_upon?).to be(false)
-
       @cell_1.fire_upon
       expect(@cell_1.ship.health).to eq(2)
       @cell_1.fire_upon
@@ -56,7 +54,6 @@ RSpec.describe Cell do
       @cell_1 = Cell.new("B4")
       expect(@cell_1.render).to eq(".")
       @cell_1.fire_upon
-
       expect(@cell_1.render).to eq("M")
     end 
   end
@@ -65,26 +62,16 @@ RSpec.describe Cell do
     it 'test for test' do 
       cell_2 = Cell.new("C3")
       cruiser = Ship.new("Cruiser", 3)
-
       cell_2.place_ship(cruiser)
-
       expect(cell_2.render).to eq(".")
-
       expect(cell_2.render(true)).to eq("S")
-
       cell_2.fire_upon
-
       expect(cell_2.render).to eq("H")
-
       expect(cruiser.sunk?).to eq(false)
-
       cruiser.hit
       cruiser.hit
-
       expect(cruiser.sunk?).to eq(true)
-
       expect(cell_2.render).to eq("X")
-
     end
   end
 end
