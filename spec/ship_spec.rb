@@ -7,7 +7,7 @@ RSpec.describe Ship do
 
   describe '#initialize' do
     it 'can initialize' do
-     expect(@cruiser).to be_a(Ship)
+      expect(@cruiser).to be_a(Ship)
     end
   end
 
@@ -46,5 +46,4 @@ RSpec.describe Ship do
       expect(@cruiser.sunk?).to eq(true)
     end
   end
-
 end
