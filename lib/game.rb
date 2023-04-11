@@ -30,7 +30,7 @@ class Game
           elsif input == "q"
           puts "See you next time!"
         else
-         puts "Invalid, please try again!"
+          puts "Invalid, please try again!"
           menu
         end
   end
@@ -39,7 +39,7 @@ class Game
   def comp_ship_placement
     comp_cruz_placement
     comp_sub_placement
-   
+
       puts "I have laid out my ships on the grid.
       You now need to lay out your two ships.
       The Cruiser is three units long and the Submarine is two units long."
@@ -64,24 +64,32 @@ class Game
 
     def player_cruiser_placement
       puts "Enter the squares for the Cruiser (3 spaces):"
-      player_cruiser_input = gets.chomp.upcase.split
-       if player_board.valid_placement?(@player_cruiser, player_cruiser_input) == true
-       end
-       player_board.place(@player_cruiser, player_cruiser_input)
-     end
+        player_cruiser_input = gets.chomp.upcase.split
+        if player_board.valid_placement?(@player_cruiser, player_cruiser_input) == true
+        end
+      player_board.place(@player_cruiser, player_cruiser_input)
+    end
 
-     def player_submarine_placement
+    def player_submarine_placement
       # require ‘pry’; binding.pry
       puts "Enter the squares for the Submarine (2 spaces):"
       player_submarine_input = gets.chomp.upcase.split
       if player_board.valid_placement?(@player_submarine, player_submarine_input) == false
-       puts "Those are invalid coordinates. Please try again:"
-       player_submarine_placement
+        puts "Those are invalid coordinates. Please try again:"
+        player_submarine_placement
       else
-       player_board.place(@player_submarine, player_submarine_input)
+        player_board.place(@player_submarine, player_submarine_input)
       end
     end
 
+    def turn
+      puts comp_board.render
+      puts player_board.render#(true)
+      puts 'Enter the coordinate for your shot:'
+      cell = gets.chomp.upcase
+      comp_board.cells[cell].fire_upon
+      require 'pry'; binding.pry
+    end
 
   end
   # require 'pry'; binding.pry
