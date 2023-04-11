@@ -1,12 +1,15 @@
 class Game
 
-  attr_reader :board,
+  attr_reader :comp_board,
               :comp_cruiser,
-              :comp_submarine
+              :comp_submarine,
+              :player_board,
+              :player_cruiser,
+              :player_submarine
 
   def initialize
-    @comp_player = Player.new
-    @player = Player.new
+    # @comp_player = Player.new
+    # @player = Player.new
     @comp_board = Board.new
     @player_board = Board.new
     @comp_cruiser = Ship.new("Cruiser", 3)
@@ -33,7 +36,7 @@ class Game
   end
   # We want to create loops for both ships with keys.sample and 
   # compare that to our method 'proper placement'.
-  def computer_ship_placement
+  def comp_ship_placement
     comp_cruz_placement
     comp_sub_placement
    
@@ -58,5 +61,27 @@ class Game
       end
       comp_board.place(comp_cruiser, valid_cruz_cords)
     end
+
+    def player_cruiser_placement
+      puts "Enter the squares for the Cruiser (3 spaces):"
+      player_cruiser_input = gets.chomp.upcase.split
+       if player_board.valid_placement?(@player_cruiser, player_cruiser_input) == true
+       end
+       player_board.place(@player_cruiser, player_cruiser_input)
+     end
+
+     def player_submarine_placement
+      # require ‘pry’; binding.pry
+      puts "Enter the squares for the Submarine (2 spaces):"
+      player_submarine_input = gets.chomp.upcase.split
+      if player_board.valid_placement?(@player_submarine, player_submarine_input) == false
+       puts "Those are invalid coordinates. Please try again:"
+       player_submarine_placement
+      else
+       player_board.place(@player_submarine, player_submarine_input)
+      end
+    end
+
+
   end
   # require 'pry'; binding.pry
