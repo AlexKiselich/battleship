@@ -1,10 +1,18 @@
 class Game
-  attr_reader :comp_board, :comp_cruiser, :comp_submarine
+
+  attr_reader :board,
+              :comp_cruiser,
+              :comp_submarine
+
   def initialize
+    @comp_player = Player.new
+    @player = Player.new
     @comp_board = Board.new
+    @player_board = Board.new
     @comp_cruiser = Ship.new("Cruiser", 3)
     @comp_submarine = Ship.new("Submarine", 2)
-    
+    @player_cruiser = Ship.new("Cruiser", 3)
+    @player_submarine = Ship.new("Submarine", 2)
   end
 
   def menu
@@ -12,21 +20,21 @@ class Game
     puts "What is your name?"
     name = gets.chomp
     puts "Hello #{name}, Welcome to Battleship"
-    puts "Please enter p to play a game or q to quit"
+    puts "Please enter 'p' to play a game or 'q' to quit"
     input = gets.chomp
       if input == "p" 
-        puts "play game"
+        puts "Play game!"
           elsif input == "q"
-          puts "See you next time"
+          puts "See you next time!"
         else
-         puts "invalid, please try again"
+         puts "Invalid, please try again!"
           menu
         end
   end
-  
+  # We want to create loops for both ships with keys.sample and 
+  # compare that to our method 'proper placement'.
   def computer_ship_placement
     comp_cruz_placement
-    
     comp_sub_placement
    
       puts "I have laid out my ships on the grid.
