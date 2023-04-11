@@ -10,5 +10,7 @@ game = Game.new
 puts game.menu
 
 
-puts game.computer_ship_placement
-puts game.board.render(true)
+game.computer_ship_placement
+puts game.comp_board.render
+require 'pry'; binding.pry
+puts game.comp_board.render(true)

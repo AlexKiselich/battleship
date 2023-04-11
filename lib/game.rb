@@ -1,9 +1,10 @@
 class Game
-  attr_reader :board
+  attr_reader :comp_board, :comp_cruiser, :comp_submarine
   def initialize
-    @board = Board.new
-    @cruiser = Ship.new("Cruiser", 3)
-    @submarine = Ship.new("Submarine", 2)
+    @comp_board = Board.new
+    @comp_cruiser = Ship.new("Cruiser", 3)
+    @comp_submarine = Ship.new("Submarine", 2)
+    
   end
 
   def menu
@@ -24,15 +25,30 @@ class Game
   end
   
   def computer_ship_placement
-    new_cords = []
+    comp_cruz_placement
+    
+    comp_sub_placement
+   
+      puts "I have laid out my ships on the grid.
+      You now need to lay out your two ships.
+      The Cruiser is three units long and the Submarine is two units long."
+    end
 
-    new_cords << @board.cells.keys.sample(3)
-    board.place(@cruiser, ["A1", "A2", "A3"])
-    # board.place(@submarine, ["B1", "B2"])
-    puts "I have laid out my ships on the grid.
-    You now need to lay out your two ships.
-    The Cruiser is three units long and the Submarine is two units long."
-    require 'pry'; binding.pry
+
+    def comp_sub_placement
+      valid_sub_cords = comp_board.cells.keys.sample(2)
+      until comp_board.valid_placement?(comp_submarine, valid_sub_cords) == true
+        valid_sub_cords = comp_board.cells.keys.sample(2)
+      end
+      comp_board.place(comp_submarine, valid_sub_cords)
+    end
+
+    def comp_cruz_placement
+      valid_cruz_cords = comp_board.cells.keys.sample(3)
+      until comp_board.valid_placement?(comp_cruiser, valid_cruz_cords) == true
+        valid_cruz_cords = comp_board.cells.keys.sample(3)
+      end
+      comp_board.place(comp_cruiser, valid_cruz_cords)
+    end
   end
-end
-# require 'pry'; binding.pry
+  # require 'pry'; binding.pry
