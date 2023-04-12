@@ -5,7 +5,9 @@ class Game
               :comp_submarine,
               :player_board,
               :player_cruiser,
-              :player_submarine
+              :player_submarine,
+              :comp_sunk_ships,
+              :player_sunk_ships
 
   def initialize
     # @comp_player = Player.new
@@ -16,6 +18,9 @@ class Game
     @comp_submarine = Ship.new("Submarine", 2)
     @player_cruiser = Ship.new("Cruiser", 3)
     @player_submarine = Ship.new("Submarine", 2)
+
+    @comp_sunk_ships = 0
+    @player_sunk_ships = 0
   end
 
   def menu
@@ -96,25 +101,41 @@ class Game
       if comp_board.valid_coordinate?(cell) == true
         comp_board.cells[cell].fire_upon
         player_result = comp_board.cells[cell].render
+          if player_result == "X"
+            @player_sunk_ships += 1
+          end
       else 
         puts 'Please enter a valid coordinate'
         sleep(2)
         turn
-        
       end
+
 # computer turn --------------------------------
       comp_turn = player_board.cells.keys.sample(1).join
       player_board.cells[comp_turn].fire_upon
       comp_result = player_board.cells[comp_turn].render
-
- 
+      if comp_result == "X"
+        @comp_sunk_ships += 1
+      end
+      
       puts "Your shot on #{cell} was a #{player_result}"
       puts "My shot on #{comp_turn} was a #{comp_result}"
-  require 'pry'; binding.pry
-      turn
+    end?
+    # turn
   end
-
+  
   def end?
+    if @comp_sunk_ships == 2 || @player_sunk_ships == 2
+      puts "game over"
+    else
+      turn
+    end
+    require 'pry'; binding.pry
+
+      # if player_board.cells[comp_turn].empty? == false && player_board.cells[comp_turn].ship.sunk?
+      #   @comp_sunk_ships += 1
+      # end
+    end
     
-  end
+
 end
