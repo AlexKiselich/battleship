@@ -71,7 +71,6 @@ class Game
     end
 
     def player_submarine_placement
-      # require ‘pry’; binding.pry
       puts "Enter the squares for the Submarine (2 spaces):"
       player_submarine_input = gets.chomp.upcase.split
       if player_board.valid_placement?(@player_submarine, player_submarine_input) == false
@@ -84,12 +83,26 @@ class Game
 
     def turn
       puts comp_board.render
-      puts player_board.render#(true)
+      puts player_board.render(true)
+# player turn --------------------------------
       puts 'Enter the coordinate for your shot:'
       cell = gets.chomp.upcase
-      comp_board.cells[cell].fire_upon
-      require 'pry'; binding.pry
-    end
+      if comp_board.valid_coordinate?(cell) == true
+        comp_board.cells[cell].fire_upon
+        player_result = comp_board.cells[cell].render
+      else 
+        puts 'Please enter a valid coordinate:'
+      end
+# computer turn --------------------------------
+comp_turn = player_board.cells.keys.sample(1).join
+# require 'pry'; binding.pry
+player_board.cells[comp_turn].fire_upon
+comp_result = player_board.cells[comp_turn].render
 
+ 
+  puts "Your shot on #{cell} was a #{player_result}"
+  puts "My shot on #{comp_turn} was a #{comp_result}"
+  require 'pry'; binding.pry
+turn
   end
-  # require 'pry'; binding.pry
+end
