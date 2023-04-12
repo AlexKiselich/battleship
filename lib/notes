@@ -1,0 +1,12 @@
+We are trying to have the computer call a random shot.
+we want comp_turn to be able to select a random key that is valid.
+
+I want to return the results of comp_turn.
+So when the computer fires a shot on a 'cell' and we know the 'results',
+I want to say 'Your shot on 'cell' was a 'result'.
+
+
+     if comp_result == [M] puts "Miss"
+      elsif comp_result == [H] puts "Hit"
+      elsif comp_result == [X] puts "You sunk my ship!"
+      end
