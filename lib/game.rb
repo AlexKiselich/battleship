@@ -23,20 +23,41 @@ class Game
     @player_sunk_ships = 0
   end
 
-  def menu
-    puts "Hello!"
+  def menu      
+         
+   puts "    ██     ██ ██████  ██       ██████  ██████  ███    ███ ██████     ████████  ██████      ██████   █████  ████████ ████████ ██      ███████ ███████ ██   ██ ██ ██████   ██"
+   sleep(0.5)
+   puts "   ██     ██ ██      ██      ██      ██    ██ ████  ████ ██            ██    ██    ██     ██   ██ ██   ██    ██       ██    ██      ██      ██      ██   ██ ██ ██   ██  ██"
+   sleep(0.5)
+   puts "  ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████         ██    ██    ██     ██████  ███████    ██       ██    ██      █████   ███████ ███████ ██ ██████   ██"
+   sleep(0.5)
+   puts " ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██            ██    ██    ██     ██   ██ ██   ██    ██       ██    ██      ██           ██ ██   ██ ██ ██" 
+   sleep(0.5)
+   puts "█████████ ██████  ███████  ██████  ██████  ██      ██ ██████        ██     ██████      ██████  ██   ██    ██       ██    ███████ ███████ ███████ ██   ██ ██ ██        ██\n\n\n"    
+                                                                                                                                                                                                                                                
+    
+    
+    
+    
+    
+    sleep(1.0)
+    puts "Hello!\n\n"
+    sleep(0.5)
     puts "What is your name?"
     name = gets.chomp.capitalize
-    puts "Hello #{name}, Welcome to Battleship"
-    sleep(1)
+    puts "Hello #{name}, Welcome to Battleship!\n\n"
+    sleep(0.5)
     puts "Please enter 'p' to play a game or 'q' to quit"
+    sleep(0.5)
     input = gets.chomp
       if input == "p" 
-        puts "Play game!"
+        sleep(0.5)
+        puts "Play game!\n\n"
           elsif input == "q"
-          puts "See you next time!"
+          puts "See you next time!\n\n"
+          menu
         else
-          puts "Invalid, please try again!"
+          puts "Invalid, please try again!\n\n"
           menu
         end
   end
@@ -45,12 +66,12 @@ class Game
     comp_cruz_placement
     comp_sub_placement
 
-      puts "I have laid out my ships on the grid."
-      sleep(1)
-      puts "You now need to lay out your two ships."
-      sleep(1)
-      puts "The Cruiser is three units long and the Submarine is two units long."
-      sleep(1)
+      puts "I have laid out my ships on the grid.\n\n"
+      sleep(0.5)
+      puts "You now need to lay out your two ships.\n\n"
+      sleep(0.5)
+      puts "The Cruiser is three units long and the Submarine is two units long.\n\n"
+      sleep(0.5)
     end
 
 
@@ -71,20 +92,24 @@ class Game
     end
 
     def player_cruiser_placement
+      sleep(0.5)
       puts "Enter the squares for the Cruiser (3 spaces):"
         player_cruiser_input = gets.chomp.upcase.split
         if player_board.valid_placement?(@player_cruiser, player_cruiser_input) == true
           player_board.place(@player_cruiser, player_cruiser_input)
         else
+          sleep(0.5)
           puts "Those are invalid coordinates. Please try again:"
           player_cruiser_placement
         end
     end
 
     def player_submarine_placement
+      sleep(0.5)
       puts "Enter the squares for the Submarine (2 spaces):"
       player_submarine_input = gets.chomp.upcase.split
       if player_board.valid_placement?(@player_submarine, player_submarine_input) == false
+        sleep(0.5)
         puts "Those are invalid coordinates. Please try again:"
         player_submarine_placement
       else
@@ -93,11 +118,13 @@ class Game
     end
 
     def turn
+      sleep(0.5)
       puts comp_board.render
+      sleep(0.5)
       puts player_board.render(true)
 
 # player turn --------------------------------
-
+      sleep(0.5)
       puts 'Enter the coordinate for your shot:'
       cell = gets.chomp.upcase
       if comp_board.valid_coordinate?(cell) == true && comp_board.cells[cell].fired_upon? == false
@@ -108,7 +135,7 @@ class Game
           end
       else 
         puts 'Please enter a valid coordinate'
-        sleep(2)
+        sleep(0.5)
         turn
       end
 
@@ -126,20 +153,28 @@ class Game
         if comp_result == "X"
           @comp_sunk_ships += 1
         end
-      
+      sleep(0.5)
       puts "Your shot on #{cell} was a #{player_result}"
+      sleep(0.5)
       puts "My shot on #{comp_turn} was a #{comp_result}"
-
+      sleep(0.5)
     end?
-  
   end
   
   def end?
-    if @comp_sunk_ships == 2 || @player_sunk_ships == 2
-      puts "game over"
+    if @comp_sunk_ships == 2 
+      sleep(0.5)
+      puts "I won!\n\n"
+      sleep(0.5)
+      menu
+    elsif
+      @player_sunk_ships == 2 
+      sleep(0.5)
+      puts "You won!\n\n"
+      sleep(0.5)
+      menu
     else
       turn
     end
   end
-
 end
