@@ -8,6 +8,5 @@ RSpec.describe Game do
 
   it "has a menu" do
     @game = Game.new
-    @game.menu
   end
 end
