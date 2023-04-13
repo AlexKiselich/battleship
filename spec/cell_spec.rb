@@ -56,10 +56,8 @@ RSpec.describe Cell do
       @cell_1.fire_upon
       expect(@cell_1.render).to eq("M")
     end 
-  end
 
-  describe 'test' do
-    it 'test for test' do 
+    it 'test render method' do 
       cell_2 = Cell.new("C3")
       cruiser = Ship.new("Cruiser", 3)
       cell_2.place_ship(cruiser)

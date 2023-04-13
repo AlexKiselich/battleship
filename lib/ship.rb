@@ -15,7 +15,6 @@ class Ship
     else
       false
     end
-    # false unless @health == 0
   end
 
   def hit
