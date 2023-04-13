@@ -95,10 +95,12 @@ class Game
     def turn
       puts comp_board.render
       puts player_board.render(true)
+
 # player turn --------------------------------
+
       puts 'Enter the coordinate for your shot:'
       cell = gets.chomp.upcase
-      if comp_board.valid_coordinate?(cell) == true
+      if comp_board.valid_coordinate?(cell) == true && comp_board.cells[cell].fired_upon? == false
         comp_board.cells[cell].fire_upon
         player_result = comp_board.cells[cell].render
           if player_result == "X"
@@ -111,17 +113,25 @@ class Game
       end
 
 # computer turn --------------------------------
+
       comp_turn = player_board.cells.keys.sample(1).join
-      player_board.cells[comp_turn].fire_upon
-      comp_result = player_board.cells[comp_turn].render
-      if comp_result == "X"
-        @comp_sunk_ships += 1
+      until player_board.cells[comp_turn].fired_upon? == false
+        comp_turn = player_board.cells.keys.sample(1).join
       end
+      # require 'pry'; binding.pry
+      player_board.cells[comp_turn].fire_upon
+      # end
+
+      comp_result = player_board.cells[comp_turn].render(true)
+        if comp_result == "X"
+          @comp_sunk_ships += 1
+        end
       
       puts "Your shot on #{cell} was a #{player_result}"
       puts "My shot on #{comp_turn} was a #{comp_result}"
+
     end?
-    # turn
+  
   end
   
   def end?
@@ -130,12 +140,6 @@ class Game
     else
       turn
     end
-    require 'pry'; binding.pry
-
-      # if player_board.cells[comp_turn].empty? == false && player_board.cells[comp_turn].ship.sunk?
-      #   @comp_sunk_ships += 1
-      # end
-    end
-    
+  end
 
 end
