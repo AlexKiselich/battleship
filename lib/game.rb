@@ -5,7 +5,9 @@ class Game
               :comp_submarine,
               :player_board,
               :player_cruiser,
-              :player_submarine
+              :player_submarine,
+              :comp_sunk_ships,
+              :player_sunk_ships
 
   def initialize
     # @comp_player = Player.new
@@ -16,13 +18,17 @@ class Game
     @comp_submarine = Ship.new("Submarine", 2)
     @player_cruiser = Ship.new("Cruiser", 3)
     @player_submarine = Ship.new("Submarine", 2)
+
+    @comp_sunk_ships = 0
+    @player_sunk_ships = 0
   end
 
   def menu
     puts "Hello!"
     puts "What is your name?"
-    name = gets.chomp
+    name = gets.chomp.capitalize
     puts "Hello #{name}, Welcome to Battleship"
+    sleep(1)
     puts "Please enter 'p' to play a game or 'q' to quit"
     input = gets.chomp
       if input == "p" 
@@ -34,15 +40,17 @@ class Game
           menu
         end
   end
-  # We want to create loops for both ships with keys.sample and 
-  # compare that to our method 'proper placement'.
+
   def comp_ship_placement
     comp_cruz_placement
     comp_sub_placement
 
-      puts "I have laid out my ships on the grid.
-      You now need to lay out your two ships.
-      The Cruiser is three units long and the Submarine is two units long."
+      puts "I have laid out my ships on the grid."
+      sleep(1)
+      puts "You now need to lay out your two ships."
+      sleep(1)
+      puts "The Cruiser is three units long and the Submarine is two units long."
+      sleep(1)
     end
 
 
@@ -66,8 +74,11 @@ class Game
       puts "Enter the squares for the Cruiser (3 spaces):"
         player_cruiser_input = gets.chomp.upcase.split
         if player_board.valid_placement?(@player_cruiser, player_cruiser_input) == true
+          player_board.place(@player_cruiser, player_cruiser_input)
+        else
+          puts "Those are invalid coordinates. Please try again:"
+          player_cruiser_placement
         end
-      player_board.place(@player_cruiser, player_cruiser_input)
     end
 
     def player_submarine_placement
@@ -84,25 +95,51 @@ class Game
     def turn
       puts comp_board.render
       puts player_board.render(true)
+
 # player turn --------------------------------
+
       puts 'Enter the coordinate for your shot:'
       cell = gets.chomp.upcase
-      if comp_board.valid_coordinate?(cell) == true
+      if comp_board.valid_coordinate?(cell) == true && comp_board.cells[cell].fired_upon? == false
         comp_board.cells[cell].fire_upon
         player_result = comp_board.cells[cell].render
+          if player_result == "X"
+            @player_sunk_ships += 1
+          end
       else 
-        puts 'Please enter a valid coordinate:'
+        puts 'Please enter a valid coordinate'
+        sleep(2)
+        turn
       end
-# computer turn --------------------------------
-comp_turn = player_board.cells.keys.sample(1).join
-# require 'pry'; binding.pry
-player_board.cells[comp_turn].fire_upon
-comp_result = player_board.cells[comp_turn].render
 
- 
-  puts "Your shot on #{cell} was a #{player_result}"
-  puts "My shot on #{comp_turn} was a #{comp_result}"
-  require 'pry'; binding.pry
-turn
+# computer turn --------------------------------
+
+      comp_turn = player_board.cells.keys.sample(1).join
+      until player_board.cells[comp_turn].fired_upon? == false
+        comp_turn = player_board.cells.keys.sample(1).join
+      end
+      # require 'pry'; binding.pry
+      player_board.cells[comp_turn].fire_upon
+      # end
+
+      comp_result = player_board.cells[comp_turn].render(true)
+        if comp_result == "X"
+          @comp_sunk_ships += 1
+        end
+      
+      puts "Your shot on #{cell} was a #{player_result}"
+      puts "My shot on #{comp_turn} was a #{comp_result}"
+
+    end?
+  
   end
+  
+  def end?
+    if @comp_sunk_ships == 2 || @player_sunk_ships == 2
+      puts "game over"
+    else
+      turn
+    end
+  end
+
 end
