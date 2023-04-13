@@ -42,14 +42,14 @@ class Game
     sleep(0.5)
     puts "What is your name?"
     name = gets.chomp.capitalize
-    puts "Hello #{name}, Welcome to Battleship!\n\n"
-    sleep(0.5)
+    puts "\n\nHello #{name}, Welcome to Battleship!\n\n"
+    sleep(1.0)
     puts "Please enter 'p' to play a game or 'q' to quit"
     sleep(0.5)
     input = gets.chomp
       if input == "p" 
         sleep(0.5)
-        puts "Play game!\n\n"
+        puts "\n\nPlay game!\n\n"
           elsif input == "q"
           puts "See you next time!\n\n"
           menu
@@ -62,8 +62,11 @@ class Game
   def comp_ship_placement
     comp_cruz_placement
     comp_sub_placement
-
-      puts "I have laid out my ships on the grid.\n\n"
+    sleep(0.5)
+    puts comp_board.render
+    puts "=============COMPUTER BOARD=============\n\n"
+    sleep(0.5)
+      puts "I have laid out my ships on the grid above.\n\n"
       sleep(0.5)
       puts "You now need to lay out your two ships.\n\n"
       sleep(0.5)
@@ -103,7 +106,7 @@ class Game
 
     def player_submarine_placement
       sleep(0.5)
-      puts "Enter the squares for the Submarine (2 spaces):"
+      puts "\n\nEnter the squares for the Submarine (2 spaces):"
       player_submarine_input = gets.chomp.upcase.split
       if player_board.valid_placement?(@player_submarine, player_submarine_input) == false
         sleep(0.5)
@@ -117,8 +120,10 @@ class Game
     def turn
       sleep(0.5)
       puts comp_board.render
+      puts "=============COMPUTER BOARD=============\n\n"
       sleep(0.5)
       puts player_board.render(true)
+      puts "=============PLAYER BOARD=============\n\n"
 
 # player turn --------------------------------
       sleep(0.5)
@@ -151,9 +156,9 @@ class Game
           @comp_sunk_ships += 1
         end
       sleep(0.5)
-      puts "Your shot on #{cell} was a #{player_result}"
+      puts "\n\nYour shot on #{cell} was a #{player_result}\n\n"
       sleep(0.5)
-      puts "My shot on #{comp_turn} was a #{comp_result}"
+      puts "My shot on #{comp_turn} was a #{comp_result}\n\n"
       sleep(0.5)
     end?
   end
